@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top Travel Deals</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #003366, #66ccff);
+      overflow-x: hidden;
+      color: white;
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 2.5rem;
+      color: #fff;
+      z-index: 10;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 40px 20px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .affiliate-button {
+      padding: 15px 25px;
+      background: #fff;
+      color: #0077cc;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .affiliate-button:hover {
+      transform: scale(1.05);
+      background: #e0f0ff;
+    }
+
+    .slogan {
+      position: absolute;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+      animation: float 30s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(-100px) rotate(0deg); }
+      to { transform: translateY(120vh) rotate(360deg); }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="fallingCanvas"></canvas>
+
+  <h1>Discover the Best Travel Deals Online!</h1>
+
+  <div class="button-container">
+    <a class="affiliate-button" href="https://www.dpbolvw.net/click-101484913-16987541" target="_blank">Cheap Flights</a>
+    <a class="affiliate-button" href="https://www.jdoqocy.com/click-101484913-17008602" target="_blank">Last Minute Offers</a>
+    <a class="affiliate-button" href="https://www.anrdoezrs.net/click-101484913-17014576" target="_blank">Adventure Packages</a>
+    <a class="affiliate-button" href="https://www.kqzyfj.com/click-101484913-17055972" target="_blank">Top Resorts</a>
+    <a class="affiliate-button" href="https://www.tkqlhce.com/click-101484913-17065163" target="_blank">Luxury Cruises</a>
+    <a class="affiliate-button" href="https://www.jdoqocy.com/click-101484913-17082916" target="_blank">Budget Stays</a>
+    <a class="affiliate-button" href="https://www.dpbolvw.net/click-101484913-17109870" target="_blank">All-Inclusive Deals</a>
+    <a class="affiliate-button" href="https://www.tkqlhce.com/click-101484913-17123125" target="_blank">City Escapes</a>
+    <a class="affiliate-button" href="https://www.tkqlhce.com/click-101484913-15508745" target="_blank">Europe Getaways</a>
+    <a class="affiliate-button" href="https://www.kqzyfj.com/click-101484913-15596239" target="_blank">Caribbean Packages</a>
+    <a class="affiliate-button" href="https://www.dpbolvw.net/click-101484913-15444625" target="_blank">Exotic Islands</a>
+    <a class="affiliate-button" href="https://www.anrdoezrs.net/click-101484913-15591852" target="_blank">Flight + Hotel</a>
+    <a class="affiliate-button" href="https://www.anrdoezrs.net/click-101484913-15593857" target="_blank">Vacation for Two</a>
+    <a class="affiliate-button" href="https://www.kqzyfj.com/click-101484913-15850670" target="_blank">Romantic Trips</a>
+    <a class="affiliate-button" href="https://www.kqzyfj.com/click-101484913-15872110" target="_blank">Weekend Specials</a>
+  </div>
+
+  <script>
+    const slogans = [
+      "Unforgettable journeys await",
+      "Escape the ordinary",
+      "Adventure starts here",
+      "Pack your dreams",
+      "Discover paradise",
+      "Deals too good to miss",
+      "Explore the world today",
+      "Live. Travel. Repeat.",
+      "Wander often, wonder always",
+      "Your next destination is calling",
+      "See more for less",
+      "Dream. Book. Go.",
+      "Say yes to new adventures",
+      "Fly far, pay less",
+      "Where memories are made",
+      "Unlock your getaway",
+      "Travel more, worry less",
+      "Fly smart, stay better",
+      "Get out there!",
+      "Book it. Love it."
+    ];
+
+    // Create floating slogans
+    for (let i = 0; i < 20; i++) {
+      const span = document.createElement('div');
+      span.className = 'slogan';
+      span.style.left = `${Math.random() * 100}%`;
+      span.style.top = `${Math.random() * 100}%`;
+      span.style.fontSize = `${Math.random() * 1.2 + 0.8}rem`;
+      span.style.animationDuration = `${20 + Math.random() * 30}s`;
+      span.textContent = slogans[i % slogans.length];
+      document.body.appendChild(span);
+    }
+
+    // Falling letters canvas animation
+    const canvas = document.getElementById("fallingCanvas");
+    const ctx = canvas.getContext("2d");
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const fontSize = 16;
+    const columns = Math.floor(width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 50, 0.05)";
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = "#00ffff";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
